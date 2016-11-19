@@ -1,3 +1,4 @@
+
 set nocompatible
 filetype off
 
@@ -44,8 +45,9 @@ set expandtab
 set laststatus=2
 set clipboard=unnamedplus
 set splitright
+set relativenumber
 
-set guifont=Source\ Code\ Pro\ for\ Powerline\ Regular\ 16
+set guifont=Inconsolata\ 20
 set guioptions=ae
 set nohlsearch
 
@@ -82,3 +84,4 @@ nnoremap <c-n> :bp<cr>
 nnoremap <c-m> :bn<cr>
 
 nnoremap <leader>t :put =strftime('%Y-%m-%d %T')<cr>
+
