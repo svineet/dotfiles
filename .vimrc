@@ -45,6 +45,7 @@ set expandtab
 set laststatus=2
 set clipboard=unnamedplus
 set splitright
+set splitbelow
 set relativenumber
 
 set guifont=Inconsolata\ 20
@@ -52,7 +53,7 @@ set guioptions=ae
 set nohlsearch
 
 set background=light
-colorscheme base16-atelierestuary
+colorscheme base16-ateliercave
 set number
 
 " CtrlP settings
@@ -72,7 +73,7 @@ nnoremap <leader>d :set background=dark<cr>
 nnoremap <leader>l :set background=light<cr>
 nnoremap <space> zz
 nnoremap <c-s> :w<cr>
-nnoremap <c-x> :close<cr>
+nnoremap <c-x> :close!<cr>
 inoremap <c-u> <esc>viwU
 inoremap jk <esc>
 vnoremap jk <esc> 
@@ -82,6 +83,17 @@ nnoremap <c-a> ggvG$
 nnoremap <c-j> :NERDTreeToggle<cr>
 nnoremap <c-n> :bp<cr>
 nnoremap <c-m> :bn<cr>
+nnoremap <leader>r :!codeutil %<cr>
+nnoremap <leader>cr :execute CodeutilExecute()<cr>
 
 nnoremap <leader>t :put =strftime('%Y-%m-%d %T')<cr>
 
+" Competitive programming execution function
+function! CodeutilExecute()
+    let output = system("codeutil " . bufname("%") . " 2>&1")
+
+    split __CM_SVINEET__
+    normal! ggdG
+
+    call append(0, split(output, '\v\n'))
+endfunction
