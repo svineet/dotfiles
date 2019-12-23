@@ -10,10 +10,9 @@ fi
 
 # User specific aliases and functions
 export PATH="/home/svineet/code/Robot3T/bin:$PATH"
-
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
 export PATH="/home/svineet/bin:$PATH"
+export PATH="/home/svineet/bin/Postman:$PATH"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/svineet/code/google_cloud_setup/google-cloud-sdk/path.bash.inc' ]; then . '/home/svineet/code/google_cloud_setup/google-cloud-sdk/path.bash.inc'; fi
@@ -67,4 +66,19 @@ export TODOTXT_DEFAULT_ACTION=ls
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+[[ -s /home/svineet/.autojump/etc/profile.d/autojump.sh ]] && source /home/svineet/.autojump/etc/profile.d/autojump.sh
+
+# Adding the kdesrc-build directory to the path
+export PATH="$HOME/kde/src/kdesrc-build:$PATH"
+
+# Creating alias for running software built with kdesrc-build
+kdesrc-run ()
+{
+  source "$HOME/kde/build/$1/prefix.sh" && "$HOME/kde/usr/bin/$1"
+}
+
+export C35="206.189.143.222"
+
+alias sshc35="ssh root@$C35"
 

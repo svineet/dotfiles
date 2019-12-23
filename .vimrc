@@ -44,16 +44,20 @@ Plugin 'mxw/vim-jsx'
 
 Plugin 'lepture/vim-jinja'
 Plugin 'vim-scripts/tabpage.vim'
+Plugin 'arrufat/vala.vim'
+
+Plugin 'ycm-core/YouCompleteMe'
+
+Plugin 'nvie/vim-flake8'
 
 call vundle#end()
-
 
 " Basic Settings
 " ==============
 
 filetype plugin indent on
 syntax on
-
+ 
 set autoindent
 set expandtab
 set tabstop=4
@@ -70,9 +74,9 @@ set guioptions=e
 set nohlsearch
 
 set background=dark
-colorscheme Tomorrow-Night
+colorscheme Tomorrow-Night-Bright
 if has("gui_running")
-    colorscheme base16-atelierdune
+    colorscheme Tomorrow-Night-Bright
 endif
 set number
 
@@ -80,10 +84,10 @@ set number
 " augroups
 " ========
 
-augroup vimrc
-  au BufReadPre * setlocal foldmethod=indent
-  au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
-augroup END
+" augroup vimrc
+"   au BufReadPre * setlocal foldmethod=indent
+"   au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
+" augroup END
 
 
 " Extension settings
@@ -98,6 +102,10 @@ let g:ctrlp_open_new_file = 't'
 let g:airline_powerline_fonts = 1
 autocmd VimEnter * AirlineToggleWhitespace
 
+" vim-flake8 settings
+let g:flake8_show_in_gutter = 1
+let g:flake8_show_in_file = 1
+
 
 " Mappings
 " ========
@@ -107,6 +115,7 @@ nnoremap <leader>rc :tabnew ~/.vimrc<cr>
 nnoremap <leader>sv :source ~/.vimrc<cr>
 nnoremap <leader>dd :set background=dark<cr>
 nnoremap <leader>ll :set background=light<cr>
+nnoremap <leader>ac I# 
 
 " pdb macro for python debugging
 nnoremap <leader>p oimport pdb; pdb.set_trace()<esc>
@@ -143,6 +152,13 @@ nnoremap <leader>lt :call CompileLatexFile()<cr>
 
 " Show current function name in C
 nnoremap <leader>f :call ShowFuncName()<cr>
+
+" Quick markdown stuff
+nnoremap <leader>h1 VypVr=
+nnoremap <leader>h2 VypVr-
+
+" Flake 8 marker removal
+nnoremap <leader>fx :call flake8#Flake8UnplaceMarkers()<cr>
 
 
 " Functions
