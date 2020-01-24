@@ -69,16 +69,34 @@ export NVM_DIR="$HOME/.nvm"
 
 [[ -s /home/svineet/.autojump/etc/profile.d/autojump.sh ]] && source /home/svineet/.autojump/etc/profile.d/autojump.sh
 
-# Adding the kdesrc-build directory to the path
-export PATH="$HOME/kde/src/kdesrc-build:$PATH"
-
-# Creating alias for running software built with kdesrc-build
-kdesrc-run ()
-{
-  source "$HOME/kde/build/$1/prefix.sh" && "$HOME/kde/usr/bin/$1"
-}
-
-export C35="206.189.143.222"
+export C35="68.183.88.177"
 
 alias sshc35="ssh root@$C35"
 
+n ()
+{
+    # Block nesting of nnn in subshells
+    if [ -n $NNNLVL ] && [ "${NNNLVL:-0}" -ge 1 ]; then
+        echo "nnn is already running"
+        return
+    fi
+
+    # The default behaviour is to cd on quit (nnn checks if NNN_TMPFILE is set)
+    # To cd on quit only on ^G, remove the "export" as in:
+    #     NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+    # NOTE: NNN_TMPFILE is fixed, should not be modified
+    export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+
+    # Unmask ^Q (, ^V etc.) (if required, see `stty -a`) to Quit nnn
+    # stty start undef
+    # stty stop undef
+    # stty lwrap undef
+    # stty lnext undef
+
+    nnn "$@"
+
+    if [ -f "$NNN_TMPFILE" ]; then
+        . "$NNN_TMPFILE"
+        rm -f "$NNN_TMPFILE" > /dev/null
+    fi
+}

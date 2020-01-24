@@ -47,6 +47,7 @@ Plugin 'vim-scripts/tabpage.vim'
 Plugin 'arrufat/vala.vim'
 
 Plugin 'ycm-core/YouCompleteMe'
+Plugin 'davidhalter/jedi-vim'
 
 Plugin 'nvie/vim-flake8'
 
